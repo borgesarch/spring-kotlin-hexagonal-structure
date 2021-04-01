@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  spring-hexagonal-structure:
+    image: 'spring-hexagonal-structure'
+    ports:
+      - "3332:3332"
+    build:
+      context: Dockerfile
+    container_name: spring-hexagonal-structure
+    depends_on:
+      - spring-hexagonal-structure-db
+    environment:
+      - TEST=1
+
+  spring-hexagonal-structure-db:
+    image: 'postgres:13.1-alpine'
+    ports:
+      - "5433:5433"
+    container_name: spring-hexagonal-structure-db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
